@@ -1,0 +1,27 @@
+input:
+  kind: tables
+  nodes_path: examples/data/graph_nodes.csv
+  edges_path: examples/data/graph_edges.csv
+  schema:
+    graph_id_col: graph_id
+    graph_label_col: graph_label
+    node_id_col: id
+    node_type_col: type
+    edge_source_col: source
+    edge_target_col: target
+    edge_type_col: relation
+task:
+  level: graph
+model:
+  name: graph2vec
+  iterations: 2
+  embedding_dim: 64
+  projection: hash
+  random_state: 7
+  classifier:
+    max_iter: 1000
+output_dir: runs/graph_classification
+artifacts:
+  model_path: runs/graph_classification/model.joblib
+  embeddings_path: runs/graph_classification/embeddings.csv
+  predictions_path: runs/graph_classification/predictions.csv

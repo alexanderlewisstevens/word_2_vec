@@ -1,0 +1,27 @@
+input:
+  kind: tables
+  nodes_path: examples/data/node_nodes.csv
+  edges_path: examples/data/node_edges.csv
+  schema:
+    node_id_col: id
+    node_type_col: type
+    node_label_col: label
+    train_mask_col: train_mask
+    val_mask_col: val_mask
+    test_mask_col: test_mask
+    edge_source_col: source
+    edge_target_col: target
+    edge_type_col: relation
+task:
+  level: node
+  target_node_type: user
+model:
+  name: heterosage
+train:
+  epochs: 25
+  lr: 0.01
+  batch_size: 8
+output_dir: runs/node_classification
+artifacts:
+  model_path: runs/node_classification/model.pt
+  predictions_path: runs/node_classification/predictions.csv

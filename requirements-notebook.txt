@@ -1,0 +1,5 @@
+# Optional: enough for IDE notebook cells using the existing .venv kernel.
+ipykernel>=6.29
+
+# For a browser-based local Jupyter UI, install this too:
+# notebook>=7.2

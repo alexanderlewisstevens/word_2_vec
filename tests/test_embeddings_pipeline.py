@@ -5,6 +5,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
 
 from graph_to_vec import Graph2VecTransformer, GraphClassificationPipeline
+from graph_to_vec.embeddings import MetaPath2VecNodeEmbedder
 
 
 def _graphs(count: int = 8) -> tuple[list[nx.MultiDiGraph], list[int]]:
@@ -57,3 +58,22 @@ def test_graph_classification_pipeline_grid_search_compatible() -> None:
     search.fit(graphs, labels)
 
     assert search.best_estimator_.predict(graphs).shape == (8,)
+
+
+def test_metapath2vec_fit_transform_returns_per_type_embeddings() -> None:
+    graph = nx.MultiDiGraph()
+    graph.add_node("u0", type="user")
+    graph.add_node("u1", type="user")
+    graph.add_node("d0", type="device")
+    graph.add_edge("u0", "d0", relation="uses_device")
+    graph.add_edge("d0", "u1", relation="used_by")
+
+    embeddings = MetaPath2VecNodeEmbedder(
+        metapaths=[[("user", "uses_device", "device"), ("device", "used_by", "user")]],
+        embedding_dim=4,
+        walks_per_node=2,
+        random_state=7,
+    ).fit_transform(graph)
+
+    assert embeddings["user"].shape == (2, 4)
+    assert embeddings["device"].shape == (1, 4)

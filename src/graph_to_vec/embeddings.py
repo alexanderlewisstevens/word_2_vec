@@ -425,4 +425,4 @@ class MetaPath2VecNodeEmbedder(BaseEstimator, TransformerMixin):
         y: Any = None,
         **fit_params: Any,
     ) -> dict[str, np.ndarray]:
-        return self.fit(X, y).transform()
+        return self.fit(X, y).embeddings_

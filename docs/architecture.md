@@ -24,6 +24,13 @@ Node-level classification can use:
 - `NodeClassifierTrainer` with `HeteroSAGEClassifier`.
 - `RGCNClassifier` for flattened relation-aware knowledge graph baselines.
 
+Matching and querying can use:
+
+- `CandidatePairBuilder` for blocked candidate generation and pair-level similarity features.
+- `MatchGraphBuilder` for turning candidate pairs into evidence graphs.
+- `MatchRanker` for graph-classification-backed ranking and per-record queries.
+- `EmbeddingIndex` for lightweight nearest-neighbor lookup over graph or node embeddings.
+
 ## Extension Hooks
 
 The registry reserves model names for later work:

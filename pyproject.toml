@@ -32,6 +32,9 @@ dev = [
   "pytest>=8.0",
   "ruff>=0.8",
 ]
+notebook = [
+  "ipykernel>=6.29",
+]
 
 [project.scripts]
 g2v = "graph_to_vec.cli:app"
